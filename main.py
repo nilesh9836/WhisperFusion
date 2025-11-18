@@ -9,10 +9,6 @@ import ctypes
 
 from multiprocessing import Process, Manager, Value, Queue
 
-from whisper_live.trt_server import TranscriptionServer
-from llm_service import TensorRTLLMEngine
-from tts_service import WhisperSpeechTTS
-
 
 def parse_arguments():
     parser = argparse.ArgumentParser()
@@ -125,6 +121,10 @@ if __name__ == "__main__":
     
     # GPU mode - use TensorRT (original behavior)
     else:
+        from whisper_live.trt_server import TranscriptionServer
+        from llm_service import TensorRTLLMEngine
+        from tts_service import WhisperSpeechTTS
+        
         if not args.whisper_tensorrt_path:
             raise ValueError("Please provide whisper_tensorrt_path to run the pipeline.")
             import sys
