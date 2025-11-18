@@ -10,3 +10,9 @@ braceexpand
 openai-whisper
 whisperspeech
 soundfile
+
+# CPU-mode dependencies
+openai>=1.0.0
+transformers>=4.30.0
+sentencepiece
+pyttsx3

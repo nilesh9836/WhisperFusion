@@ -55,6 +55,59 @@ docker compose up
 
 **NOTE**
 
+## CPU-Only Demo Mode
+
+For users without a GPU or TensorRT, WhisperFusion now includes a CPU-only fallback mode. This demo mode uses the same three-process architecture (transcription, LLM, TTS) but with CPU-compatible components.
+
+### Features of CPU Mode:
+- **File-based processing**: Drop WAV files into `input_audio/` directory
+- **Flexible LLM options**: Use OpenAI API or local HuggingFace models
+- **Text outputs**: Results written to `outputs/` directory
+- **Optional audio**: Uses `espeak` for audio playback if available
+
+### Quick Start (Ubuntu/Linux):
+
+1. **Run the setup script**:
+   ```bash
+   bash run_cpu.sh
+   ```
+
+2. **Activate the virtual environment**:
+   ```bash
+   source venv/bin/activate
+   ```
+
+3. **Set up OpenAI API key (optional, for OpenAI LLM provider)**:
+   ```bash
+   export OPENAI_API_KEY='your-api-key-here'
+   ```
+
+4. **Run with OpenAI provider**:
+   ```bash
+   python main.py --cpu --llm_provider openai
+   ```
+   
+   **OR run with HuggingFace local model**:
+   ```bash
+   python main.py --cpu --llm_provider hf
+   ```
+
+5. **Process audio files**:
+   - Drop WAV files into the `input_audio/` directory
+   - The pipeline will automatically process them
+   - Check `outputs/` directory for results
+
+### CPU Mode Options:
+- `--cpu`: Enable CPU-only mode
+- `--llm_provider`: Choose `openai` (requires API key) or `hf` (local HuggingFace model)
+- `--hf_model`: Specify HuggingFace model (default: `google/flan-t5-small`)
+
+### Notes:
+- CPU mode is intended as a demo/test pipeline, not for real-time low-latency applications
+- First run with HuggingFace models will download the model (may take time)
+- For audio playback, install espeak: `sudo apt-get install espeak`
+- OpenAI API usage will incur costs based on your usage
+
 ## Contact Us
 
 For questions or issues, please open an issue. Contact us at:
